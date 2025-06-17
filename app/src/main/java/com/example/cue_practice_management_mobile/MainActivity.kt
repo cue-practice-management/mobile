@@ -4,19 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
 import com.example.cue_practice_management_mobile.core.navigation.AppNavHost
+import com.example.cue_practice_management_mobile.core.session.SessionObserver
 import com.example.cue_practice_management_mobile.core.ui.theme.CuepracticemanagementmobileTheme
-import com.example.cue_practice_management_mobile.features.auth.components.LoginForm
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,8 +18,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
             CuepracticemanagementmobileTheme {
+                val navController = rememberNavController()
+
+                SessionObserver(navController = navController)
+
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Column(
                         modifier = Modifier
@@ -33,11 +32,10 @@ class MainActivity : ComponentActivity() {
                             .statusBarsPadding()
                             .fillMaxSize()
                     ) {
-                        AppNavHost()
+                        AppNavHost(navController = navController)
                     }
                 }
             }
         }
-
     }
 }

@@ -1,4 +1,4 @@
-package com.example.cue_practice_management_mobile.features.splash.view_models
+package com.example.cue_practice_management_mobile.features.splash.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

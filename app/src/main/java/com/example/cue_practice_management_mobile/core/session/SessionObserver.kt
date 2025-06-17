@@ -1,4 +1,4 @@
-package com.example.cue_practice_management_mobile.core.observers
+package com.example.cue_practice_management_mobile.core.session
 
 import android.util.Log
 import androidx.compose.runtime.Composable

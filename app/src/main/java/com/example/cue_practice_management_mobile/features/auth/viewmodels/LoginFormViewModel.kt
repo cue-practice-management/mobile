@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.cue_practice_management_mobile.core.validators.EmailValidator
 import com.example.cue_practice_management_mobile.core.validators.PasswordValidator
 import com.example.cue_practice_management_mobile.features.auth.models.LoginRequest
-import com.example.cue_practice_management_mobile.features.auth.repositories.AuthRepository
+import com.example.cue_practice_management_mobile.domain.repositories.AuthRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -45,16 +45,14 @@ class LoginFormViewModel @Inject constructor(
 
     fun validateForm(): Boolean {
         val emailResult = emailValidator.validate(_state.value.email)
-        val passwordResult = passwordValidator.validate(_state.value.password)
 
         _state.update {
             it.copy(
                 emailError = emailResult.errorMessage,
-                passwordError = passwordResult.errorMessage
             )
         }
 
-        return emailResult.successful && passwordResult.successful
+        return emailResult.successful
     }
 
     fun login(onSuccess: () -> Unit) {

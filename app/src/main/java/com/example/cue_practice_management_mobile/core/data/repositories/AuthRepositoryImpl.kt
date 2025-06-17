@@ -1,10 +1,11 @@
-package com.example.cue_practice_management_mobile.domain.repositories
+package com.example.cue_practice_management_mobile.core.data.repositories
 
-import com.example.cue_practice_management_mobile.core.models.User
+import com.example.cue_practice_management_mobile.domain.models.User
 import com.example.cue_practice_management_mobile.features.auth.models.LoginRequest
 import com.example.cue_practice_management_mobile.features.auth.models.LoginResponse
 import com.example.cue_practice_management_mobile.features.auth.models.RefreshTokenResponse
-import com.example.cue_practice_management_mobile.core.api.AuthService
+import com.example.cue_practice_management_mobile.core.data.api.AuthService
+import com.example.cue_practice_management_mobile.domain.repositories.AuthRepository
 import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(

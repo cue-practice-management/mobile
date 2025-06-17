@@ -1,7 +1,7 @@
-package com.example.cue_practice_management_mobile.features.auth
+package com.example.cue_practice_management_mobile.config.di
 
 import com.example.cue_practice_management_mobile.domain.repositories.AuthRepository
-import com.example.cue_practice_management_mobile.domain.repositories.AuthRepositoryImpl
+import com.example.cue_practice_management_mobile.core.data.repositories.AuthRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

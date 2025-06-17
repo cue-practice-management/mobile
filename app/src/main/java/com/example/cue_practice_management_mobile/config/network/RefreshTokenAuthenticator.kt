@@ -1,8 +1,9 @@
-package com.example.cue_practice_management_mobile.core.network
+package com.example.cue_practice_management_mobile.config.network
 
+import com.example.cue_practice_management_mobile.core.data.api.AuthService
 import com.example.cue_practice_management_mobile.core.events.AuthEvent
 import com.example.cue_practice_management_mobile.core.events.EventBus
-import com.example.cue_practice_management_mobile.core.security.TokenManager
+import com.example.cue_practice_management_mobile.config.security.TokenManager
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
 import okhttp3.Request

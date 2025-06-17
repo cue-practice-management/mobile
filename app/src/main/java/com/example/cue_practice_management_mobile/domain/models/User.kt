@@ -1,4 +1,4 @@
-package com.example.cue_practice_management_mobile.core.models
+package com.example.cue_practice_management_mobile.domain.models
 
 import com.example.cue_practice_management_mobile.domain.enums.UserRole
 

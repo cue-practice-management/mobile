@@ -1,6 +1,6 @@
-package com.example.cue_practice_management_mobile.core.network
+package com.example.cue_practice_management_mobile.config.network
 
-import com.example.cue_practice_management_mobile.core.security.TokenManager
+import com.example.cue_practice_management_mobile.config.security.TokenManager
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor

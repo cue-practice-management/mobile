@@ -1,4 +1,4 @@
-package com.example.cue_practice_management_mobile.core.security
+package com.example.cue_practice_management_mobile.config.security
 
 import android.content.Context
 import androidx.datastore.core.DataStore

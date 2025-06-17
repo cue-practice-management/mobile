@@ -12,7 +12,7 @@ class AuthInterceptor @Inject constructor(
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val token = runBlocking { tokenManager.token.firstOrNull() }
+        val token = runBlocking { tokenManager.refreshToken.firstOrNull() }
         val originalRequest = chain.request()
 
         return if (token != null) {

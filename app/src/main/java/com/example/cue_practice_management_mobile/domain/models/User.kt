@@ -1,9 +1,11 @@
 package com.example.cue_practice_management_mobile.core.models
 
+import com.example.cue_practice_management_mobile.domain.enums.UserRole
+
 data class User(
     val _id: String,
     val firstName: String,
     val lastName: String,
     val email: String,
-    val role: String,
+    val role: UserRole,
 )

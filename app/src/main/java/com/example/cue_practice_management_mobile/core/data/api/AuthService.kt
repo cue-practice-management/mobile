@@ -1,4 +1,4 @@
-package com.example.cue_practice_management_mobile.features.auth.services
+package com.example.cue_practice_management_mobile.core.api
 
 import com.example.cue_practice_management_mobile.core.models.User
 import com.example.cue_practice_management_mobile.features.auth.models.LoginRequest
@@ -15,9 +15,9 @@ interface AuthService {
     @POST("auth/login")
     suspend fun login(@Body credentials: LoginRequest): LoginResponse
 
-    @GET("auth/refresh")
+    @POST("auth/refresh")
     suspend fun refreshToken(): RefreshTokenResponse
 
     @POST("auth/logout")
-    suspend fun logout(): Void
+    suspend fun logout(): Unit
 }

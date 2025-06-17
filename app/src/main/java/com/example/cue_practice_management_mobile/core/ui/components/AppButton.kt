@@ -1,4 +1,4 @@
-package com.example.cue_practice_management_mobile.core.ui.components
+package com.example.cue_practice_management_mobile.ui.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size

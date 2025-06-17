@@ -1,8 +1,9 @@
 package com.example.cue_practice_management_mobile.features.splash.view_models
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cue_practice_management_mobile.core.session.UserSessionManager
+import com.example.cue_practice_management_mobile.core.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val userSessionManager: UserSessionManager
+    private val userSessionManager: SessionManager
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<Destination?>(null)
@@ -20,7 +21,9 @@ class SplashViewModel @Inject constructor(
 
     fun initializeUser() {
         viewModelScope.launch {
-            val loggedIn = userSessionManager.initialize()
+            Log.d("SplashViewModel", "Initializing user session")
+            val loggedIn = userSessionManager.isLoggedIn()
+            Log.d("SplashViewModel", "User logged in: $loggedIn")
             _uiState.value = if (loggedIn) Destination.HOME else Destination.LOGIN
         }
     }

@@ -1,8 +1,8 @@
 package com.example.cue_practice_management_mobile.core.network
 
+import com.example.cue_practice_management_mobile.core.events.AuthEvent
+import com.example.cue_practice_management_mobile.core.events.EventBus
 import com.example.cue_practice_management_mobile.core.security.TokenManager
-import com.example.cue_practice_management_mobile.core.session.UserSessionManager
-import com.example.cue_practice_management_mobile.features.auth.services.AuthService
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
 import okhttp3.Request
@@ -12,8 +12,7 @@ import javax.inject.Inject
 
 class TokenAuthenticator @Inject constructor(
     private val tokenManager: TokenManager,
-    private val authService: AuthService,
-    private val sessionManager: UserSessionManager
+    private val authService: AuthService
 ) : Authenticator {
 
     override fun authenticate(route: Route?, response: Response): Request? {
@@ -21,19 +20,21 @@ class TokenAuthenticator @Inject constructor(
 
         return runBlocking {
             try {
-                val refreshResponse = authService.refreshToken()
-                tokenManager.saveToken(refreshResponse.accessToken)
+                val refreshTokenResponse = authService.refreshToken()
+                tokenManager.saveAccessToken(refreshTokenResponse.accessToken)
+                tokenManager.saveRefreshToken(refreshTokenResponse.mobileRefreshToken)
 
-                response.request().newBuilder()
-                    .header("Authorization", "Bearer ${refreshResponse.accessToken}")
+                response.request.newBuilder()
+                    .header("Authorization", "Bearer ${refreshTokenResponse.accessToken}")
                     .build()
             } catch (e: Exception) {
-                sessionManager.logout()
+                EventBus.send(AuthEvent.Logout)
                 null
             }
         }
     }
 
     private fun responseCount(response: Response): Int =
-        generateSequence(response) { it.priorResponse() }.count()
+        generateSequence(response) { it.priorResponse }.count()
 }
+

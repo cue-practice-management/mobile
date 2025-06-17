@@ -1,4 +1,4 @@
-package com.example.cue_practice_management_mobile.ui.theme
+package com.example.cue_practice_management_mobile.core.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

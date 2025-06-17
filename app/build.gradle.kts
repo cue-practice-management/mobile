@@ -68,6 +68,9 @@ dependencies {
     //Datastore
     implementation(libs.androidx.datastore.preferences)
 
+    // OkHttp
+    implementation(libs.okhttp.urlconnection)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

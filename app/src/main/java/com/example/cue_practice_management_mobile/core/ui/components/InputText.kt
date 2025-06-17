@@ -1,4 +1,4 @@
-package com.example.cue_practice_management_mobile.ui.components
+package com.example.cue_practice_management_mobile.core.ui.components
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.MaterialTheme

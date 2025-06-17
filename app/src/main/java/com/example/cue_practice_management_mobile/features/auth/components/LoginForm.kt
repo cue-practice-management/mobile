@@ -10,19 +10,19 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.cue_practice_management_mobile.core.ui.components.AppButton
 import com.example.cue_practice_management_mobile.core.ui.components.InputText
-import com.example.cue_practice_management_mobile.features.auth.view_models.LoginFormViewModel
+import com.example.cue_practice_management_mobile.features.auth.viewmodels.LoginFormViewModel
 
 @Composable
-fun LoginForm() {
+fun LoginForm(
+    onLoginSuccess: () -> Unit = {}
+) {
     val viewModel: LoginFormViewModel = hiltViewModel()
     val state = viewModel.state.collectAsState().value
-    val onLoginSuccess: () -> Unit = {
-    }
 
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(horizontal = 16.dp, vertical = 8.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         InputText(
@@ -37,8 +37,6 @@ fun LoginForm() {
             value = state.password,
             onValueChange = viewModel::onPasswordChanged,
             placeholder = "Contraseña",
-            isError = state.passwordError != null,
-            errorMessage = state.passwordError,
             visualTransformation = PasswordVisualTransformation()
         )
 
@@ -47,9 +45,11 @@ fun LoginForm() {
             text = "Iniciar Sesión",
             onClick = {
                 if (viewModel.validateForm()) {
-                    onLoginSuccess()
+                    viewModel.login(onSuccess = onLoginSuccess)
                 }
-            }
+            },
+            isLoading = state.isLoading,
+            enabled = !state.isLoading
         )
     }
 }

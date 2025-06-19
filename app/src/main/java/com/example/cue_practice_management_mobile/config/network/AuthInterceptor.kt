@@ -1,5 +1,6 @@
 package com.example.cue_practice_management_mobile.config.network
 
+import android.util.Log
 import com.example.cue_practice_management_mobile.config.security.TokenManager
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.runBlocking
@@ -12,7 +13,8 @@ class AuthInterceptor @Inject constructor(
 ) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val token = runBlocking { tokenManager.refreshToken.firstOrNull() }
+        val token = runBlocking { tokenManager.accessToken.firstOrNull() }
+        Log.d("AuthInterceptor", "Intercepting request with token: $token")
         val originalRequest = chain.request()
 
         return if (token != null) {

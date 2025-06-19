@@ -13,9 +13,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.cue_practice_management_mobile.core.navigation.Routes
-import com.example.cue_practice_management_mobile.core.ui.components.AppLogo
-import com.example.cue_practice_management_mobile.core.ui.components.AppLogoSize
-import com.example.cue_practice_management_mobile.core.ui.components.AppTitleText
+import com.example.cue_practice_management_mobile.core.ui.components.atoms.AppLogo
+import com.example.cue_practice_management_mobile.core.ui.components.atoms.AppLogoSize
+import com.example.cue_practice_management_mobile.core.ui.components.atoms.AppTitleText
 import com.example.cue_practice_management_mobile.features.auth.components.LoginForm
 
 
@@ -44,7 +44,7 @@ fun LoginScreen(
 
                 LoginForm(
                     onLoginSuccess = {
-                        navController.navigate(Routes.HOME) {
+                        navController.navigate(Routes.STUDENT_HOME) {
                             popUpTo(Routes.LOGIN) { inclusive = true }
                             launchSingleTop = true
                         }

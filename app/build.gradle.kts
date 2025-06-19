@@ -71,6 +71,13 @@ dependencies {
     // OkHttp
     implementation(libs.okhttp.urlconnection)
 
+    // Coil for image loading
+    //implementation(libs.coil.compose)
+    //implementation(libs.coil.network.okhttp)
+
+    //Icons
+    implementation(libs.icons.lucide)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

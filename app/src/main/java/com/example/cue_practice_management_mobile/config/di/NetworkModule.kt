@@ -42,11 +42,13 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideAuthRetrofit(
+        authInterceptor: AuthInterceptor,
         cookieJar: JavaNetCookieJar
     ): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .client(
             OkHttpClient.Builder()
+                .addInterceptor(authInterceptor)
                 .cookieJar(cookieJar)
                 .build()
         )

@@ -1,4 +1,4 @@
-package com.example.cue_practice_management_mobile.core.ui.components.molecules
+package com.example.cue_practice_management_mobile.features.practice_process.components
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -17,7 +17,7 @@ import java.util.Locale
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun PracticeDateCard(label: String, date: LocalDate) {
+fun PracticeProcessDateCard(label: String, date: LocalDate) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         AppLabelText(label)
         Spacer(modifier = Modifier.height(4.dp))

@@ -13,5 +13,8 @@ class PracticeProcessRepositoryImpl @Inject constructor(
         return practiceProcessService.getProfessorCurrentPracticeProcesses()
     }
 
+    override suspend fun getStudentCurrentPracticeProcess(): PracticeProcess {
+        return practiceProcessService.getStudentCurrentPracticeProcess()
+    }
 
 }

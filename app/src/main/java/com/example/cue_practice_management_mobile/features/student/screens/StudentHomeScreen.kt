@@ -1,5 +1,7 @@
 package com.example.cue_practice_management_mobile.features.student.screens
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
@@ -13,7 +15,9 @@ import com.example.cue_practice_management_mobile.features.student.viewmodels.St
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.example.cue_practice_management_mobile.features.practice_process.components.PracticeProcessSummaryCard
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun StudentHomeScreen(
     navController: NavHostController,
@@ -21,6 +25,7 @@ fun StudentHomeScreen(
 ) {
     val isLoading by viewModel.isLoading.collectAsState()
     val student = viewModel.student.collectAsState()
+    val currentPracticeProcess = viewModel.currentPracticeProcess.collectAsState()
 
     if (isLoading) {
         Box(
@@ -32,7 +37,7 @@ fun StudentHomeScreen(
     } else {
         student.value?.let { student ->
             AppBaseScreenLayout(navController = navController) {
-                Text(text = "Welcome, ${student.firstName}!")
+                PracticeProcessSummaryCard(practiceProcess = currentPracticeProcess.value)
             }
         }
     }

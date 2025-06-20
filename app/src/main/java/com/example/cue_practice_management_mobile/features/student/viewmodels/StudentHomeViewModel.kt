@@ -14,10 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class StudentHomeViewModel @Inject constructor(
-    private val sessionManager: SessionManager,
     private val studentRepository: StudentRepository
 ) : ViewModel() {
-    val user: StateFlow<User?> = sessionManager.user
     private val _student = MutableStateFlow<Student?>(null)
     val student: StateFlow<Student?> = _student
 

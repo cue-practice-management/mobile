@@ -17,7 +17,6 @@ import com.example.cue_practice_management_mobile.core.ui.components.atoms.AppLa
 import com.example.cue_practice_management_mobile.core.ui.components.atoms.AppSubtitleText
 import com.example.cue_practice_management_mobile.core.ui.components.atoms.AppTitleText
 import com.example.cue_practice_management_mobile.core.ui.components.molecules.CompanyAvatarAndName
-import com.example.cue_practice_management_mobile.core.ui.components.molecules.ProfessorLabel
 import com.example.cue_practice_management_mobile.domain.models.PracticeProcess
 import java.time.format.DateTimeFormatter
 
@@ -59,7 +58,6 @@ fun PracticeCard(process: PracticeProcess, modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.height(8.dp))
 
             // Profesor
-            ProfessorLabel(professorName = process.professor.firstName)
         }
     }
 }

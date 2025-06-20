@@ -1,4 +1,4 @@
-package com.example.cue_practice_management_mobile.core.ui.components.organisms
+package com.example.cue_practice_management_mobile.features.practice_process.components
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -12,46 +12,40 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.cue_practice_management_mobile.core.ui.components.atoms.AppSubtitleText
 import com.example.cue_practice_management_mobile.core.ui.components.atoms.AppTitleText
-import com.example.cue_practice_management_mobile.core.ui.components.molecules.PracticeDateCard
-import com.example.cue_practice_management_mobile.core.ui.components.molecules.PracticeInfoColumn
-import com.example.cue_practice_management_mobile.core.ui.constants.PracticeProgressState
-import java.time.LocalDate
+import com.example.cue_practice_management_mobile.domain.models.PracticeProcess
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun PracticeSummarySection(
-    title: String,
-    subtitle: String,
-    progressState: PracticeProgressState,
-    startDate: LocalDate,
-    endDate: LocalDate,
-    company: String,
-    tutor: String,
-    professor: String
+fun PracticeProcessSummaryCard(
+    practiceProcess: PracticeProcess?
 ) {
+    if (practiceProcess == null) {
+        Text("Aún no tienes un proceso de práctica activo.")
+        return
+    }
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .background(Color(0xFFEAF7FF), RoundedCornerShape(24.dp))
             .padding(16.dp)
     ) {
-        AppTitleText(title)
-        AppSubtitleText(subtitle)
+        AppTitleText(practiceProcess.practiceDefinition.name)
+        AppSubtitleText(practiceProcess.practiceDefinition.description)
         Spacer(Modifier.height(16.dp))
-        PracticeProgressBar(progressState)
         Spacer(Modifier.height(16.dp))
         Row(horizontalArrangement = Arrangement.SpaceBetween) {
-            PracticeDateCard("Inicio", startDate)
+            PracticeProcessDateCard("Inicio", practiceProcess.startDate)
             Spacer(Modifier.width(8.dp))
-            PracticeDateCard("Fin", endDate)
+            PracticeProcessDateCard("Fin", practiceProcess.endDate)
         }
         Spacer(Modifier.height(16.dp))
-        PracticeInfoColumn(company, tutor, professor)
+        PracticeProcessInfoColumn(practiceProcess.company.name, practiceProcess.professor.firstName)
     }
 }

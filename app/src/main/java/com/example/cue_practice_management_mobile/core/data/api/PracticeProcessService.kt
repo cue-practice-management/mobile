@@ -8,4 +8,8 @@ interface PracticeProcessService {
     @GET("/practice-processes/professor/me/current")
     suspend fun getProfessorCurrentPracticeProcesses(): List<PracticeProcess>
 
+
+    @GET("/practice-processes/student/me/current")
+    suspend fun getStudentCurrentPracticeProcess(): PracticeProcess
+
 }

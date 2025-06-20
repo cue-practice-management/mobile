@@ -32,9 +32,4 @@ class StudentHomeViewModel @Inject constructor(
         }
     }
 
-    fun logout() {
-        viewModelScope.launch {
-            sessionManager.handleLogout()
-        }
-    }
 }

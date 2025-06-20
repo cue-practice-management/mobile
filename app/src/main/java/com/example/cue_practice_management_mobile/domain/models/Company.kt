@@ -19,3 +19,16 @@ data class Company (
     val createdAt: Date,
     val updatedAt: Date,
 )
+
+data class CompanyBasicInfo(
+    val _id: String,
+    val name: String,
+    val logoUrl: String?,
+    val corporateName: String,
+    val nit: String,
+    val phone: String,
+    val websiteUrl: String,
+    val address: String,
+    val size: CompanySize,
+) {
+}

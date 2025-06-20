@@ -6,12 +6,13 @@ import androidx.lifecycle.viewModelScope
 import com.example.cue_practice_management_mobile.core.session.SessionManager
 import com.example.cue_practice_management_mobile.core.validators.EmailValidator
 import com.example.cue_practice_management_mobile.core.validators.PasswordValidator
-import com.example.cue_practice_management_mobile.features.auth.models.LoginRequest
+import com.example.cue_practice_management_mobile.domain.models.User
 import com.example.cue_practice_management_mobile.domain.repositories.AuthRepository
+import com.example.cue_practice_management_mobile.features.auth.models.LoginRequest
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -57,7 +58,7 @@ class LoginFormViewModel @Inject constructor(
         return emailResult.successful
     }
 
-    fun login(onSuccess: () -> Unit) {
+    fun login(onSuccess: (User?) -> Unit) {
         if (!validateForm()) return
 
         _state.update { it.copy(isLoading = true, generalError = null) }
@@ -74,7 +75,9 @@ class LoginFormViewModel @Inject constructor(
                 )
                 Log.d("LoginFormViewModel", "Login response: $response")
                 sessionManager.handleLogin(response)
-                onSuccess()
+                Log.d("LoginFormViewModel", "Login successful, updating session ${sessionManager.user}")
+                val user = sessionManager.user.value;
+                onSuccess(user)
             } catch (e: Exception) {
                 Log.e("LoginFormViewModel", "Login failed", e)
                 _state.update { it.copy(generalError = "Credenciales inválidas o error del servidor") }

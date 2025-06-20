@@ -9,6 +9,8 @@ data class Professor(
     val email: String,
     val role: UserRole,
     val photoUrl: String? = null,
+    val academicProgram: AcademicProgram,
+    val phoneNumber: Number? = null,
 
 ) {
 

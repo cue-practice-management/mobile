@@ -6,5 +6,6 @@ object Routes {
     const val STUDENT_HOME = "student_home"
     const val PROFESSOR_HOME = "professor_home"
     const val ADMIN_HOME = "admin_home"
+    const val PRACTICE_DETAIL = "practice_detail"
 
 }

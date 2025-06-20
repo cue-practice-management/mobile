@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.cue_practice_management_mobile.features.auth.screens.LoginScreen
+import com.example.cue_practice_management_mobile.features.practice_process.screen.PracticeProcessDetailScreen
 import com.example.cue_practice_management_mobile.features.professor.screens.ProfessorHomeScreen
 import com.example.cue_practice_management_mobile.features.splash.screens.SplashScreen
 import com.example.cue_practice_management_mobile.features.student.screens.StudentHomeScreen
@@ -39,6 +40,14 @@ fun AppNavHost(
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 ProfessorHomeScreen(navController = navController)
             }
+        }
+
+        composable("${Routes.PRACTICE_DETAIL}/{processId}") { backStackEntry ->
+            val processId = backStackEntry.arguments?.getString("processId")
+            PracticeProcessDetailScreen(
+                processId = processId ?: "",
+                navController = navController
+            )
         }
     }
 }

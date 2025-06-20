@@ -23,3 +23,21 @@ data class PracticeProcess(
 
 ) {
 }
+
+data class PracticeProcessDetail(
+    val _id: String,
+    val practiceDefinition: PracticeDefinition,
+    val student: Student,
+    val professor: Professor,
+    val company: CompanyBasicInfo,
+    val startDate: LocalDate,
+    val endDate: LocalDate,
+    val status: PracticeProcessStatus,
+    val finalGrade: Double? = null,
+    val cancelledBy: PracticeProcessCancelledBy? = null,
+    val cancellationDate: LocalDate? = null,
+    val cancellationReason: String? = null,
+    val createdAt: Date,
+    val updatedAt: Date
+) {
+}

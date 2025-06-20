@@ -9,6 +9,10 @@ class PracticeProcessRepositoryImpl @Inject constructor(
     private val practiceProcessService: PracticeProcessService
 ): PracticeProcessRepository {
 
+    override suspend fun getPracticeProcessById(id: String): PracticeProcess? {
+        return practiceProcessService.getPracticeProcessById(id)
+    }
+
     override suspend fun getProfessorCurrentPracticeProcesses(): List<PracticeProcess> {
         return practiceProcessService.getProfessorCurrentPracticeProcesses()
     }

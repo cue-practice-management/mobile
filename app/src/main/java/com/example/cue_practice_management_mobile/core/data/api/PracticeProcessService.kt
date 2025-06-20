@@ -5,6 +5,9 @@ import retrofit2.http.GET
 
 interface PracticeProcessService {
 
+    @GET("practice-processes/{id}")
+    suspend fun getPracticeProcessById(id: String): PracticeProcess?
+
     @GET("practice-processes/professor/me/current")
     suspend fun getProfessorCurrentPracticeProcesses(): List<PracticeProcess>
 

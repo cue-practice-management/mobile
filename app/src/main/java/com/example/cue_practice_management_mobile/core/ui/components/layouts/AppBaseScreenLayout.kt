@@ -1,6 +1,12 @@
 package com.example.cue_practice_management_mobile.core.ui.components.layouts
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -14,8 +20,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.cue_practice_management_mobile.core.navigation.NAV_ITEMS
 import com.example.cue_practice_management_mobile.core.navigation.Routes
-import com.example.cue_practice_management_mobile.core.ui.components.organisms.AppHeader
 import com.example.cue_practice_management_mobile.core.ui.components.organisms.AppBottomNavBar
+import com.example.cue_practice_management_mobile.core.ui.components.organisms.AppHeader
 import com.example.cue_practice_management_mobile.core.viewmodels.UserSessionViewModel
 import com.example.cue_practice_management_mobile.domain.models.User
 
@@ -55,6 +61,7 @@ fun AppBaseScreenLayout(
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxWidth()
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
                 ) {
                     content(user)
                 }

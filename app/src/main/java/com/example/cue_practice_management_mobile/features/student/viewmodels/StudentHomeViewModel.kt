@@ -1,5 +1,6 @@
 package com.example.cue_practice_management_mobile.features.student.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.cue_practice_management_mobile.domain.models.PracticeProcess
@@ -32,6 +33,9 @@ class StudentHomeViewModel @Inject constructor(
             _student.value = studentRepository.meStudent()
             _currentPracticeProcess.value = practiceProcessRepository.getStudentCurrentPracticeProcess()
             _isLoading.value = false
+
+            Log.d("StudentHomeViewModel", "Student: ${_student.value}")
+            Log.d("StudentHomeViewModel", "Current Practice Process: ${_currentPracticeProcess.value}")
         }
     }
 

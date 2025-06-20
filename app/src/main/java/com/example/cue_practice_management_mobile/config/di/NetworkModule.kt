@@ -6,6 +6,9 @@ import com.example.cue_practice_management_mobile.core.data.api.AuthService
 import com.example.cue_practice_management_mobile.core.data.api.PracticeProcessService
 import com.example.cue_practice_management_mobile.core.data.api.ProfessorService
 import com.example.cue_practice_management_mobile.core.data.api.StudentService
+import com.example.cue_practice_management_mobile.core.utils.LocalDateAdapter
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,6 +19,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.CookieManager
 import java.net.CookiePolicy
+import java.time.LocalDate
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
@@ -33,6 +37,13 @@ object NetworkModule {
 
     private const val BASE_URL = "http://10.0.2.2:3000/api/"
 
+
+    @Provides
+    @Singleton
+    fun provideGson(): Gson = GsonBuilder()
+        .registerTypeAdapter(LocalDate::class.java, LocalDateAdapter())
+        .create()
+
     @Provides
     @Singleton
     fun provideCookieJar(): JavaNetCookieJar {
@@ -46,7 +57,8 @@ object NetworkModule {
     @Singleton
     fun provideAuthRetrofit(
         authInterceptor: AuthInterceptor,
-        cookieJar: JavaNetCookieJar
+        cookieJar: JavaNetCookieJar,
+        gs: Gson
     ): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .client(
@@ -55,7 +67,7 @@ object NetworkModule {
                 .cookieJar(cookieJar)
                 .build()
         )
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create(gs))
         .build()
 
     @AppRetrofit
@@ -64,7 +76,8 @@ object NetworkModule {
     fun provideAppRetrofit(
         authInterceptor: AuthInterceptor,
         tokenAuthenticator: TokenAuthenticator,
-        cookieJar: JavaNetCookieJar
+        cookieJar: JavaNetCookieJar,
+        gs: Gson
     ): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .client(
@@ -74,7 +87,7 @@ object NetworkModule {
                 .cookieJar(cookieJar)
                 .build()
         )
-        .addConverterFactory(GsonConverterFactory.create())
+        .addConverterFactory(GsonConverterFactory.create(gs))
         .build()
 
     @Provides

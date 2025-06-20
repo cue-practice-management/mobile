@@ -74,6 +74,7 @@ class LoginFormViewModel @Inject constructor(
                 )
                 Log.d("LoginFormViewModel", "Login response: $response")
                 sessionManager.handleLogin(response)
+                Log.d("LoginFormViewModel", "Login successful, updating session ${sessionManager.user}")
                 onSuccess()
             } catch (e: Exception) {
                 Log.e("LoginFormViewModel", "Login failed", e)

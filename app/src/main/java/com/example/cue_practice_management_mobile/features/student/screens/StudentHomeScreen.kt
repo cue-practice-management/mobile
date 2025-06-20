@@ -1,6 +1,5 @@
 package com.example.cue_practice_management_mobile.features.student.screens
 
-import android.util.Log
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -9,19 +8,17 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.cue_practice_management_mobile.core.ui.components.layouts.AppBaseScreenLayout
 import com.example.cue_practice_management_mobile.features.student.viewmodels.StudentHomeViewModel
-import androidx.compose.runtime.getValue
-import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.cue_practice_management_mobile.core.navigation.NAV_ITEMS
 import com.example.cue_practice_management_mobile.core.navigation.Routes
+import com.example.cue_practice_management_mobile.core.viewmodels.UserSessionViewModel
 
 @Composable
 fun StudentHomeScreen(
     navController: NavHostController,
-    viewModel: StudentHomeViewModel = hiltViewModel()
+    viewModel: StudentHomeViewModel = hiltViewModel(),
+    userSessionViewModel: UserSessionViewModel = hiltViewModel()
 ) {
-    val userState = viewModel.user.collectAsState()
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route ?: NAV_ITEMS.HOME.route
+    val userState = userSessionViewModel.user.collectAsState()
+
 
     LaunchedEffect(userState.value) {
         if (userState.value == null) {
@@ -32,14 +29,7 @@ fun StudentHomeScreen(
     }
 
     userState.value?.let { user ->
-        AppBaseScreenLayout(
-            user = user,
-            selectedRoute = currentRoute,
-            onLogout = {
-                viewModel.logout()
-            },
-            onNavItemSelected = { route -> navController.navigate(route) }
-        ) {
+        AppBaseScreenLayout(navController = navController) {
             Text(text = "Welcome, ${user.firstName}!")
         }
     }

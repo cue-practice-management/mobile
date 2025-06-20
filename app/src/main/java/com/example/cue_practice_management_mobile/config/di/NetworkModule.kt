@@ -3,6 +3,7 @@ package com.example.cue_practice_management_mobile.config.di
 import com.example.cue_practice_management_mobile.config.network.AuthInterceptor
 import com.example.cue_practice_management_mobile.core.data.api.AuthService
 import com.example.cue_practice_management_mobile.config.network.TokenAuthenticator
+import com.example.cue_practice_management_mobile.core.data.api.ProfessorService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,7 +29,7 @@ annotation class AuthRetrofit
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val BASE_URL = "http://10.0.2.2:3000/api/"
+    private const val BASE_URL = "http://192.168.20.21:3000/api/"
 
     @Provides
     @Singleton
@@ -80,5 +81,11 @@ object NetworkModule {
         @AuthRetrofit retrofit: Retrofit
     ): AuthService = retrofit.create(AuthService::class.java)
 
+    @Provides
+    @Singleton
+    fun provideProfessorService(
+        @AppRetrofit retrofit: Retrofit
+    ): ProfessorService =
+        retrofit.create(ProfessorService::class.java)
 
 }

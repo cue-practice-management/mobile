@@ -1,5 +1,6 @@
 package com.example.cue_practice_management_mobile.features.professor.components
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,7 +22,8 @@ fun ProfessorHomeHeader(professor: Professor) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
     ) {
         AppUserAvatar(
             photoUrl = professor.photoUrl,

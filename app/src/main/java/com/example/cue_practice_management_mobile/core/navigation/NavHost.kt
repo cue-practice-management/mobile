@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.cue_practice_management_mobile.features.auth.screens.LoginScreen
+import com.example.cue_practice_management_mobile.features.professor.screens.ProfessorHomeScreen
 import com.example.cue_practice_management_mobile.features.splash.screens.SplashScreen
 import com.example.cue_practice_management_mobile.features.student.screens.StudentHomeScreen
 
@@ -31,6 +32,12 @@ fun AppNavHost(
         composable(Routes.STUDENT_HOME) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 StudentHomeScreen(navController = navController)
+            }
+        }
+
+        composable(Routes.PROFESSOR_HOME) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                ProfessorHomeScreen(navController = navController)
             }
         }
     }

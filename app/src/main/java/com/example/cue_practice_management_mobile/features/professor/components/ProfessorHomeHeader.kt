@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.cue_practice_management_mobile.core.ui.components.atoms.AppTitleText
 import com.example.cue_practice_management_mobile.core.ui.components.atoms.AppUserAvatar
 import com.example.cue_practice_management_mobile.domain.models.Professor
 
@@ -34,9 +35,8 @@ fun ProfessorHomeHeader(professor: Professor) {
         Spacer(modifier = Modifier.width(16.dp))
 
         Column {
-            Text(
+            AppTitleText(
                 text = "Bienvenido,",
-                style = MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.primary
             )
             Text(

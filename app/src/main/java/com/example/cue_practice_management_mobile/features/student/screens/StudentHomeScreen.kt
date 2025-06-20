@@ -1,6 +1,8 @@
 package com.example.cue_practice_management_mobile.features.student.screens
 
-import android.util.Log
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -10,6 +12,8 @@ import androidx.navigation.NavHostController
 import com.example.cue_practice_management_mobile.core.ui.components.layouts.AppBaseScreenLayout
 import com.example.cue_practice_management_mobile.features.student.viewmodels.StudentHomeViewModel
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.cue_practice_management_mobile.core.navigation.NAV_ITEMS
 import com.example.cue_practice_management_mobile.core.navigation.Routes
@@ -20,6 +24,7 @@ fun StudentHomeScreen(
     viewModel: StudentHomeViewModel = hiltViewModel()
 ) {
     val userState = viewModel.user.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route ?: NAV_ITEMS.HOME.route
 
@@ -31,16 +36,25 @@ fun StudentHomeScreen(
         }
     }
 
-    userState.value?.let { user ->
-        AppBaseScreenLayout(
-            user = user,
-            selectedRoute = currentRoute,
-            onLogout = {
-                viewModel.logout()
-            },
-            onNavItemSelected = { route -> navController.navigate(route) }
+    if (isLoading) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
         ) {
-            Text(text = "Welcome, ${user.firstName}!")
+            CircularProgressIndicator()
+        }
+    } else {
+        userState.value?.let { user ->
+            AppBaseScreenLayout(
+                user = user,
+                selectedRoute = currentRoute,
+                onLogout = {
+                    viewModel.logout()
+                },
+                onNavItemSelected = { route -> navController.navigate(route) }
+            ) {
+                Text(text = "Welcome, ${user.firstName}!")
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ package com.example.cue_practice_management_mobile.config.di
 import com.example.cue_practice_management_mobile.config.network.AuthInterceptor
 import com.example.cue_practice_management_mobile.core.data.api.AuthService
 import com.example.cue_practice_management_mobile.config.network.TokenAuthenticator
+import com.example.cue_practice_management_mobile.core.data.api.StudentService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -80,5 +81,11 @@ object NetworkModule {
         @AuthRetrofit retrofit: Retrofit
     ): AuthService = retrofit.create(AuthService::class.java)
 
-
+    @Provides
+    @Singleton
+    fun provideStudentService(
+        @AppRetrofit retrofit: Retrofit
+    ): StudentService {
+        return retrofit.create(StudentService::class.java)
+    }
 }

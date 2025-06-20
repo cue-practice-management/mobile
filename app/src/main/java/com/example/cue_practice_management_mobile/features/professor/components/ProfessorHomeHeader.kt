@@ -8,12 +8,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.cue_practice_management_mobile.core.ui.components.atoms.AppLabelText
 import com.example.cue_practice_management_mobile.core.ui.components.atoms.AppTitleText
+import com.example.cue_practice_management_mobile.core.ui.components.atoms.AppTitleTextSize
 import com.example.cue_practice_management_mobile.core.ui.components.atoms.AppUserAvatar
 import com.example.cue_practice_management_mobile.domain.models.Professor
 
@@ -37,16 +38,15 @@ fun ProfessorHomeHeader(professor: Professor) {
         Column {
             AppTitleText(
                 text = "Bienvenido,",
-                color = MaterialTheme.colorScheme.primary
+                color = MaterialTheme.colorScheme.primary,
+                size = AppTitleTextSize.Medium,
             )
-            Text(
+            AppTitleText(
                 text = "${professor.firstName} ${professor.lastName}",
-                style = MaterialTheme.typography.headlineSmall
+                size = AppTitleTextSize.Large,
             )
-            Text(
+            AppLabelText(
                 text = professor.academicProgram.name,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
     }

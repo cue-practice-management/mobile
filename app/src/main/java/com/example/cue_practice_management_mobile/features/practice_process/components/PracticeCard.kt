@@ -18,21 +18,20 @@ import com.example.cue_practice_management_mobile.core.ui.components.atoms.AppSu
 import com.example.cue_practice_management_mobile.core.ui.components.atoms.AppTitleText
 import com.example.cue_practice_management_mobile.core.ui.components.molecules.CompanyAvatarAndName
 import com.example.cue_practice_management_mobile.core.ui.components.molecules.ProfessorLabel
-import com.example.cue_practice_management_mobile.domain.models.PracticeProcess
+import com.example.cue_practice_management_mobile.domain.models.PracticeProcessDetail
 import java.time.format.DateTimeFormatter
 
 @Composable
-fun PracticeCard(process: PracticeProcess, modifier: Modifier = Modifier) {
+fun PracticeCard(process: PracticeProcessDetail) {
     Card(
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        modifier = modifier
+        modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth()
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
 
-            // Estado de la práctica
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
@@ -42,10 +41,8 @@ fun PracticeCard(process: PracticeProcess, modifier: Modifier = Modifier) {
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Título de la práctica
             AppTitleText(text = process.practiceDefinition.name)
 
-            // Fechas
             AppSubtitleText(
                 text = "${process.startDate.format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"))} – " +
                         process.endDate.format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"))
@@ -53,12 +50,10 @@ fun PracticeCard(process: PracticeProcess, modifier: Modifier = Modifier) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Empresa
             CompanyAvatarAndName(companyName = process.company.name)
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            // Profesor
             ProfessorLabel(professorName = process.professor.firstName)
         }
     }

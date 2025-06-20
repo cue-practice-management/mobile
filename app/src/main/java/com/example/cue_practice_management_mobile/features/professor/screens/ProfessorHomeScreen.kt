@@ -11,7 +11,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.cue_practice_management_mobile.core.ui.components.atoms.AppTitleText
 import com.example.cue_practice_management_mobile.core.ui.components.layouts.AppBaseScreenLayout
+import com.example.cue_practice_management_mobile.features.professor.components.ProfessorCurrentPracticeProcesses
 import com.example.cue_practice_management_mobile.features.professor.components.ProfessorHomeHeader
 import com.example.cue_practice_management_mobile.features.professor.viewmodels.ProfessorHomeViewModel
 
@@ -22,6 +24,7 @@ fun ProfessorHomeScreen(
     viewModel: ProfessorHomeViewModel = hiltViewModel()
 ) {
     val professor = viewModel.professor
+    val currentPracticeProcesses = viewModel.currentPracticeProcesses
     val isLoading = viewModel.isLoading
 
     when {
@@ -34,7 +37,15 @@ fun ProfessorHomeScreen(
         professor != null -> {
             AppBaseScreenLayout(navController = navController) {
                 Column(Modifier.padding(16.dp)) {
-                ProfessorHomeHeader(professor = professor)
+                    ProfessorHomeHeader(professor = professor)
+                    Column {
+                        AppTitleText(
+                            text = "Procesos de práctica actuales",
+                            modifier = Modifier.padding(vertical = 16.dp)
+                        )
+                        ProfessorCurrentPracticeProcesses(currentPracticeProcesses, navController)
+                    }
+
                 }
             }
 

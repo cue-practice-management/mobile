@@ -35,7 +35,7 @@ fun AppBaseScreenLayout(
     val userState = userSessionViewModel.user.collectAsState()
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route ?: NAV_ITEMS.HOME.route
+    val currentRoute = navBackStackEntry?.destination?.route ?: NAV_ITEMS.STUDENT_HOME.route
 
     LaunchedEffect(userState.value) {
         if (userState.value == null) {

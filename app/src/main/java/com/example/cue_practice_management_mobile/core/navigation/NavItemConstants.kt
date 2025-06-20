@@ -8,13 +8,14 @@ import com.composables.icons.lucide.Rocket
 import com.example.cue_practice_management_mobile.core.models.NavItem
 
 
-//TODO: Change the routes to the constants when the view is created
 object NAV_ITEMS {
-    val HOME = NavItem(Routes.STUDENT_HOME, Lucide.House, "Inicio")
+    val STUDENT_HOME = NavItem(Routes.STUDENT_HOME, Lucide.House, "Inicio")
+    val PROFESSOR_HOME = NavItem(Routes.PROFESSOR_HOME, Lucide.House, "Inicio Profesor")
     val COMPANIES = NavItem("companies", Lucide.Building2, "Empresas")
     val EXPLORE = NavItem("explore", Lucide.Rocket, "Explorar")
     val NOTIFICATIONS = NavItem("notifications", Lucide.BellRing, "Notificaciones")
 
-    val BOTTOM_NAV_ITEMS = listOf(HOME, COMPANIES, EXPLORE, NOTIFICATIONS)
+    val STUDENT_BOTTOM_NAV_ITEMS = listOf(STUDENT_HOME, COMPANIES, EXPLORE, NOTIFICATIONS)
+    val PROFESSOR_BOTTOM_NAV_ITEMS = listOf(PROFESSOR_HOME, COMPANIES, EXPLORE, NOTIFICATIONS)
 }
 

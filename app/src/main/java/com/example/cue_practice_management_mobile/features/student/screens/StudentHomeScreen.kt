@@ -1,7 +1,5 @@
 package com.example.cue_practice_management_mobile.features.student.screens
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.cue_practice_management_mobile.core.navigation.Routes
 import com.example.cue_practice_management_mobile.core.ui.components.layouts.AppBaseScreenLayout
 import com.example.cue_practice_management_mobile.features.practice_process.components.PracticeProcessSummaryCard
 import com.example.cue_practice_management_mobile.features.student.components.StudentHomeHeader
@@ -44,7 +43,12 @@ fun StudentHomeScreen(
                 Column(modifier = Modifier.padding(16.dp)) {
                     StudentHomeHeader(student = student)
                     Spacer(modifier = Modifier.height(16.dp))
-                    PracticeProcessSummaryCard(practiceProcess = currentPracticeProcess.value)
+                    PracticeProcessSummaryCard(practiceProcess = currentPracticeProcess.value,
+                        isStudent = true,
+                        onClick = {
+                            navController.navigate("${Routes.PRACTICE_DETAIL}/${currentPracticeProcess.value?._id}")
+                        }
+                    )
                 }
             }
         }

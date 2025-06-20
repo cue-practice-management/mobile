@@ -33,6 +33,8 @@ data class PracticeProcessDetail(
     val startDate: LocalDate,
     val endDate: LocalDate,
     val status: PracticeProcessStatus,
+    val deliverables: List<PracticeProcessDeliverable> = emptyList(),
+    val followUps: List<PracticeProcessFollowUp> = emptyList(),
     val finalGrade: Double? = null,
     val cancelledBy: PracticeProcessCancelledBy? = null,
     val cancellationDate: LocalDate? = null,

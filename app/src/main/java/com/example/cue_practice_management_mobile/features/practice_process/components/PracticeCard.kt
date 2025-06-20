@@ -22,11 +22,11 @@ import com.example.cue_practice_management_mobile.domain.models.PracticeProcessD
 import java.time.format.DateTimeFormatter
 
 @Composable
-fun PracticeCard(process: PracticeProcessDetail) {
+fun PracticeCard(process: PracticeProcessDetail, modifier: Modifier = Modifier) {
     Card(
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        modifier = Modifier
+        modifier = modifier
             .padding(8.dp)
             .fillMaxWidth()
     ) {
@@ -36,7 +36,9 @@ fun PracticeCard(process: PracticeProcessDetail) {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
             ) {
-                AppLabelTag(text = process.status.name.replace("_", " ").uppercase())
+                AppLabelTag(
+                    text = process.status?.name?.replace("_", " ")?.uppercase() ?: "SIN ESTADO"
+                )
             }
 
             Spacer(modifier = Modifier.height(8.dp))

@@ -2,6 +2,7 @@ package com.example.cue_practice_management_mobile.features.practice_process.scr
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
@@ -15,6 +16,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.cue_practice_management_mobile.core.ui.components.layouts.AppBaseScreenLayout
 import com.example.cue_practice_management_mobile.features.practice_process.components.PracticeCard
+import com.example.cue_practice_management_mobile.features.practice_process.components.PracticeProcessDeliverableList
 import com.example.cue_practice_management_mobile.features.practice_process.viewmodels.PracticeProcessDetailViewModel
 
 @Composable
@@ -39,6 +41,10 @@ fun PracticeProcessDetailScreen(
         } else if (practiceProcess != null) {
             Column(Modifier.padding(16.dp)) {
                 PracticeCard(practiceProcess)
+                Spacer(modifier = Modifier.padding(vertical = 16.dp))
+                PracticeProcessDeliverableList(
+                    deliverables = practiceProcess.deliverables,
+                )
             }
         } else {
             Text("No se pudo cargar la información del proceso.")

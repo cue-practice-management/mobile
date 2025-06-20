@@ -18,7 +18,7 @@ fun ProfessorLabel(professorName: String, modifier: Modifier = Modifier) {
             }
             append(professorName)
         },
-        style = MaterialTheme.typography.bodySmall,
+        style = MaterialTheme.typography.bodyMedium,
         modifier = modifier
     )
 }

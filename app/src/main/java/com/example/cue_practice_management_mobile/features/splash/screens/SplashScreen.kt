@@ -35,7 +35,7 @@ fun SplashScreen(
         destination?.let {
             when (it) {
 
-                SplashViewModel.Destination.HOME -> navController.navigate(Routes.STUDENT_HOME) {
+                SplashViewModel.Destination.STUDENT_HOME -> navController.navigate(Routes.STUDENT_HOME) {
                     popUpTo(Routes.STUDENT_HOME) {
                         inclusive = true
                     }
@@ -44,6 +44,20 @@ fun SplashScreen(
 
                 SplashViewModel.Destination.LOGIN -> navController.navigate(Routes.LOGIN) {
                     popUpTo(Routes.SPLASH) {
+                        inclusive = true
+                    }
+                    launchSingleTop = true
+                }
+
+                SplashViewModel.Destination.PROFESSOR_HOME -> navController.navigate(Routes.PROFESSOR_HOME) {
+                    popUpTo(Routes.PROFESSOR_HOME) {
+                        inclusive = true
+                    }
+                    launchSingleTop = true
+                }
+
+                SplashViewModel.Destination.ADMIN_HOME -> navController.navigate(Routes.ADMIN_HOME) {
+                    popUpTo(Routes.LOGIN) {
                         inclusive = true
                     }
                     launchSingleTop = true

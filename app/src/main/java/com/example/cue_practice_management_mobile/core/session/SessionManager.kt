@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
+import java.util.Optional
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -41,25 +42,25 @@ class SessionManager @Inject constructor(
         }
     }
 
-    suspend fun isLoggedIn(): Boolean {
+    suspend fun initializeUser(): Optional<User> {
         var refreshToken = tokenManager.refreshToken.firstOrNull()
 
         if( refreshToken.isNullOrBlank()) {
-            return false
+            return Optional.empty()
         }else{
             try {
                 val user = authRepository.me()
                 if (user != null) {
                     _user.value = user
                     _loggedOut.value = false
-                    return true
+                    return Optional.of(user)
                 } else {
                     Log.e("SessionManager", "Failed to fetch user during login check")
-                    return false
+                    return Optional.empty()
                 }
             } catch (e: Exception) {
                 Log.e("SessionManager", "Error checking login status", e)
-                return false
+                return Optional.empty()
             }
         }
     }

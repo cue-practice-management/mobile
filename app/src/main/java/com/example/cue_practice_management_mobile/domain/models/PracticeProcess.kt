@@ -21,5 +21,4 @@ data class PracticeProcess(
     val createdAt: Date,
     val updatedAt: Date
 
-) {
-}
+)

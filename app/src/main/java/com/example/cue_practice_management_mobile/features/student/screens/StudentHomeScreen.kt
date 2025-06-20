@@ -3,17 +3,23 @@ package com.example.cue_practice_management_mobile.features.student.screens
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.cue_practice_management_mobile.core.ui.components.layouts.AppBaseScreenLayout
 import com.example.cue_practice_management_mobile.features.practice_process.components.PracticeProcessSummaryCard
+import com.example.cue_practice_management_mobile.features.student.components.StudentHomeHeader
 import com.example.cue_practice_management_mobile.features.student.viewmodels.StudentHomeViewModel
 
 @Composable
@@ -35,7 +41,11 @@ fun StudentHomeScreen(
     } else {
         student.value?.let { student ->
             AppBaseScreenLayout(navController = navController) {
-                PracticeProcessSummaryCard(practiceProcess = currentPracticeProcess.value)
+                Column(modifier = Modifier.padding(16.dp)) {
+                    StudentHomeHeader(student = student)
+                    Spacer(modifier = Modifier.height(16.dp))
+                    PracticeProcessSummaryCard(practiceProcess = currentPracticeProcess.value)
+                }
             }
         }
     }

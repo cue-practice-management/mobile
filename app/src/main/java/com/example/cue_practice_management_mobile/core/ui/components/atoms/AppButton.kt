@@ -1,8 +1,13 @@
-package com.example.cue_practice_management_mobile.core.ui.components
+package com.example.cue_practice_management_mobile.core.ui.components.atoms
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,14 +22,14 @@ enum class ButtonVariant {
 fun AppButton(
     text: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier.Companion,
     isLoading: Boolean = false,
     enabled: Boolean = true,
     variant: ButtonVariant = ButtonVariant.Primary
 ) {
     val (containerColor, contentColor) = when (variant) {
         ButtonVariant.Primary -> MaterialTheme.colorScheme.primary to MaterialTheme.colorScheme.onPrimary
-        ButtonVariant.Outline -> Color.Transparent to MaterialTheme.colorScheme.primary
+        ButtonVariant.Outline -> Color.Companion.Transparent to MaterialTheme.colorScheme.primary
         ButtonVariant.Danger -> MaterialTheme.colorScheme.error to MaterialTheme.colorScheme.onError
     }
 
@@ -70,12 +75,12 @@ fun AppButton(
 
 @Composable
 private fun AppButtonContent(text: String, isLoading: Boolean, contentColor: Color) {
-    Box(contentAlignment = Alignment.Center) {
+    Box(contentAlignment = Alignment.Companion.Center) {
         if (isLoading) {
             CircularProgressIndicator(
                 color = contentColor,
                 strokeWidth = 2.dp,
-                modifier = Modifier.size(18.dp)
+                modifier = Modifier.Companion.size(18.dp)
             )
         } else {
             Text(text = text, style = MaterialTheme.typography.labelLarge)

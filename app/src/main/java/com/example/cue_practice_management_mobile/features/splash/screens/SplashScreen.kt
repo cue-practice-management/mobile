@@ -15,8 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.cue_practice_management_mobile.core.navigation.Routes
-import com.example.cue_practice_management_mobile.core.ui.components.AppLogo
-import com.example.cue_practice_management_mobile.core.ui.components.AppLogoSize
+import com.example.cue_practice_management_mobile.core.ui.components.atoms.AppLogo
+import com.example.cue_practice_management_mobile.core.ui.components.atoms.AppLogoSize
 import com.example.cue_practice_management_mobile.features.splash.viewmodels.SplashViewModel
 
 @Composable
@@ -35,8 +35,8 @@ fun SplashScreen(
         destination?.let {
             when (it) {
 
-                SplashViewModel.Destination.HOME -> navController.navigate(Routes.HOME) {
-                    popUpTo(Routes.HOME) {
+                SplashViewModel.Destination.STUDENT_HOME -> navController.navigate(Routes.STUDENT_HOME) {
+                    popUpTo(Routes.STUDENT_HOME) {
                         inclusive = true
                     }
                     launchSingleTop = true
@@ -44,6 +44,20 @@ fun SplashScreen(
 
                 SplashViewModel.Destination.LOGIN -> navController.navigate(Routes.LOGIN) {
                     popUpTo(Routes.SPLASH) {
+                        inclusive = true
+                    }
+                    launchSingleTop = true
+                }
+
+                SplashViewModel.Destination.PROFESSOR_HOME -> navController.navigate(Routes.PROFESSOR_HOME) {
+                    popUpTo(Routes.PROFESSOR_HOME) {
+                        inclusive = true
+                    }
+                    launchSingleTop = true
+                }
+
+                SplashViewModel.Destination.ADMIN_HOME -> navController.navigate(Routes.ADMIN_HOME) {
+                    popUpTo(Routes.LOGIN) {
                         inclusive = true
                     }
                     launchSingleTop = true

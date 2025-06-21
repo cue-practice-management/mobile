@@ -6,10 +6,10 @@ val White = Color(0xFFFFFFFF)
 val Light = Color(0xFFF4F7FB)
 val Dark = Color(0xFF343A40)
 
-val Primary = Color(0xFF003F70)
+val Primary = Color(0xFF003F6F)
 val PrimaryDark = Color(0xFF002A4D)
 val PrimaryDarkest = Color(0xFF001C33)
-val PrimaryLight = Color(0xFF005B9A)
+val PrimaryLight = Color(0xFF003F6F)
 val PrimaryExtraLight = Color(0xFF0BA1FE)
 
 val Secondary = Color(0xFFD10013)

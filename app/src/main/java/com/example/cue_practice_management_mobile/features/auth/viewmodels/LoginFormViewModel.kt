@@ -3,14 +3,16 @@ package com.example.cue_practice_management_mobile.features.auth.viewmodels
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.cue_practice_management_mobile.core.session.SessionManager
 import com.example.cue_practice_management_mobile.core.validators.EmailValidator
 import com.example.cue_practice_management_mobile.core.validators.PasswordValidator
-import com.example.cue_practice_management_mobile.features.auth.models.LoginRequest
+import com.example.cue_practice_management_mobile.domain.models.User
 import com.example.cue_practice_management_mobile.domain.repositories.AuthRepository
+import com.example.cue_practice_management_mobile.features.auth.models.LoginRequest
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -27,7 +29,8 @@ data class LoginFormState(
 class LoginFormViewModel @Inject constructor(
     private val emailValidator: EmailValidator,
     private val passwordValidator: PasswordValidator,
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val sessionManager: SessionManager
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(LoginFormState())
@@ -55,7 +58,7 @@ class LoginFormViewModel @Inject constructor(
         return emailResult.successful
     }
 
-    fun login(onSuccess: () -> Unit) {
+    fun login(onSuccess: (User?) -> Unit) {
         if (!validateForm()) return
 
         _state.update { it.copy(isLoading = true, generalError = null) }
@@ -71,7 +74,10 @@ class LoginFormViewModel @Inject constructor(
                     )
                 )
                 Log.d("LoginFormViewModel", "Login response: $response")
-                onSuccess()
+                sessionManager.handleLogin(response)
+                Log.d("LoginFormViewModel", "Login successful, updating session ${sessionManager.user}")
+                val user = sessionManager.user.value;
+                onSuccess(user)
             } catch (e: Exception) {
                 Log.e("LoginFormViewModel", "Login failed", e)
                 _state.update { it.copy(generalError = "Credenciales inválidas o error del servidor") }

@@ -6,12 +6,14 @@ import com.example.cue_practice_management_mobile.core.events.EventBus
 import com.example.cue_practice_management_mobile.domain.models.User
 import com.example.cue_practice_management_mobile.config.security.TokenManager
 import com.example.cue_practice_management_mobile.domain.repositories.AuthRepository
+import com.example.cue_practice_management_mobile.features.auth.models.LoginResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
+import java.util.Optional
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -40,25 +42,39 @@ class SessionManager @Inject constructor(
         }
     }
 
-    suspend fun isLoggedIn(): Boolean {
-        var token = tokenManager.accessToken.firstOrNull()
+    suspend fun initializeUser(): Optional<User> {
+        var refreshToken = tokenManager.refreshToken.firstOrNull()
 
-        if (token.isNullOrBlank()) {
+        if( refreshToken.isNullOrBlank()) {
+            return Optional.empty()
+        }else{
             try {
-                val refresh = authRepository.refreshToken()
-                tokenManager.saveAccessToken(refresh.accessToken)
-                tokenManager.saveRefreshToken(refresh.mobileRefreshToken)
-                token = refresh.accessToken
+                val user = authRepository.me()
+                if (user != null) {
+                    _user.value = user
+                    _loggedOut.value = false
+                    return Optional.of(user)
+                } else {
+                    Log.e("SessionManager", "Failed to fetch user during login check")
+                    return Optional.empty()
+                }
             } catch (e: Exception) {
-                return false
+                Log.e("SessionManager", "Error checking login status", e)
+                return Optional.empty()
             }
         }
+    }
 
-        return try {
-            val user = authRepository.me()
-            user != null
-        } catch (e: Exception) {
-            false
+    suspend fun handleLogin(loginResponse: LoginResponse){
+        tokenManager.saveAccessToken(loginResponse.accessToken)
+        tokenManager.saveRefreshToken(loginResponse.mobileRefreshToken)
+
+        val user = authRepository.me()
+        if (user != null) {
+            _user.value = user
+            _loggedOut.value = false
+        } else {
+            Log.e("SessionManager", "Failed to fetch user after login")
         }
     }
 

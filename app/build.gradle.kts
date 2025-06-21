@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.cue_practice_management_mobile"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -70,6 +70,13 @@ dependencies {
 
     // OkHttp
     implementation(libs.okhttp.urlconnection)
+
+    // Coil for image loading
+    //implementation(libs.coil.compose)
+    //implementation(libs.coil.network.okhttp)
+
+    //Icons
+    implementation(libs.icons.lucide)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

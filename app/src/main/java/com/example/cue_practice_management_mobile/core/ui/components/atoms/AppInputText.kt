@@ -1,23 +1,24 @@
-package com.example.cue_practice_management_mobile.core.ui.components
+package com.example.cue_practice_management_mobile.core.ui.components.atoms
+
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.VisualTransformation
 
 @Composable
-fun InputText(
+fun AppInputText(
     value: String,
     onValueChange: (String) -> Unit,
     placeholder: String,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier.Companion,
     isError: Boolean = false,
     errorMessage: String? = null,
     enabled: Boolean = true,
     singleLine: Boolean = true,
-    visualTransformation: VisualTransformation = VisualTransformation.None
+    visualTransformation: VisualTransformation = VisualTransformation.Companion.None
 ) {
     OutlinedTextField(
         value = value,
